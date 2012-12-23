@@ -3,7 +3,7 @@
 Plugin Name: Auto Thickbox Gallery
 Description: Creates a thickbox gallery out of media in a post
 Author: Justin Foell
-Version: 1.0
+Version: 1.1
 Author URI: http://www.foell.org/justin
 */
 define( 'TBGAL_URL', plugins_url( '/',  __FILE__ ) );
@@ -28,9 +28,8 @@ class AutoThickboxGallery {
 	}
 	
 	public function filterImageSend( $html, $id, $caption, $title, $align, $url, $size, $alt ) {
-		$post = get_post( $id );
 		$title = $caption ? "title=\"{$caption}\" " : '';
-		return str_replace( '<a href', "<a class=\"thickbox\" rel=\"gallery-{$post->post_parent}\" {$title}href", $html );
+		return str_replace( '<a href', "<a class=\"thickbox\" rel=\"gallery-{$_POST['post_id']}\" {$title}href", $html );
 	}
 	
 	public function onThePost( $post ) {
